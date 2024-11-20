@@ -72,7 +72,7 @@ final class Worker implements Runnable {
                 }
                 enterState(WorkerState.Running);
                 run(task);
-            } catch (@SuppressWarnings("unused") InterruptedException e) {
+            } catch ( InterruptedException e) {
                 handleInterruption();
                 break;
             } catch (Throwable cause) {

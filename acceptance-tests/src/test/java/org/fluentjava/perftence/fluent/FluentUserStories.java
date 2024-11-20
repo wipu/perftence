@@ -1,5 +1,7 @@
 package org.fluentjava.perftence.fluent;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,8 +15,6 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import junit.framework.Assert;
 
 @RunWith(DefaultTestRunner.class)
 public class FluentUserStories extends AbstractMultiThreadedTest {
@@ -65,7 +65,7 @@ public class FluentUserStories extends AbstractMultiThreadedTest {
             executor().execute();
             i.incrementAndGet();
         }).start();
-        Assert.assertEquals("Invocation count doesn't match!", 10, i.get());
+        assertEquals( 10, i.get());
     }
 
     @Test

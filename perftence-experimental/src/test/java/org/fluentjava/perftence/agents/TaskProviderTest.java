@@ -1,7 +1,8 @@
 package org.fluentjava.perftence.agents;
 
 import static java.lang.Thread.sleep;
-import static junit.framework.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -15,7 +16,6 @@ import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import junit.framework.Assert;
 import net.sf.völundr.concurrent.NamedThreadFactory;
 
 public class TaskProviderTest {
@@ -72,7 +72,7 @@ public class TaskProviderTest {
             @Override
             public void run(TestTaskReporter reporter) throws Exception {
                 log().debug("runnning task2");
-                assertEquals("Task1 wasn't run before task2!", 1, TaskProviderTest.this.tasksRun.intValue());
+                assertEquals( 1, TaskProviderTest.this.tasksRun.intValue());
                 TaskProviderTest.this.tasksRun.incrementAndGet();
                 log().debug("task2 done");
             }
@@ -98,7 +98,7 @@ public class TaskProviderTest {
             @Override
             public void run(TestTaskReporter reporter) throws Exception {
                 log().debug("runnning task1");
-                assertEquals("This should have been the first task to be run!", 0,
+                assertEquals( 0,
                         TaskProviderTest.this.tasksRun.intValue());
                 log().debug("Sleeping...");
                 sleep(sleep);
@@ -218,7 +218,7 @@ public class TaskProviderTest {
     }
 
     private void assertForNextTasks(final int tasks) {
-        assertEquals("All tasks were not run!", tasks * 2, this.tasksRun.intValue());
+        assertEquals( tasks * 2, this.tasksRun.intValue());
     }
 
     private static void interruptAndJoin(final List<Thread> threads) throws InterruptedException {
@@ -280,7 +280,7 @@ public class TaskProviderTest {
         Thread.sleep(3000);
         log().debug("Temporary ugly stop");
         interruptAndJoin(threads);
-        assertEquals("All tasks were not run!", tasks, this.tasksRun.intValue());
+        assertEquals( tasks, this.tasksRun.intValue());
         done();
     }
 
@@ -308,7 +308,7 @@ public class TaskProviderTest {
         }, new TestFailureNotifier() {
             @Override
             public void testFailed(Throwable t) {
-                Assert.fail("Test fails " + t.getMessage());
+                fail("Test fails " + t.getMessage());
             }
         });
     }
@@ -332,7 +332,7 @@ public class TaskProviderTest {
         Thread.sleep(sleep);
         log().debug("Temporary ugly stop");
         interruptAndJoin(threads);
-        assertEquals("All tasks were not run!", tasks, this.tasksRun.intValue());
+        assertEquals( tasks, this.tasksRun.intValue());
         done();
     }
 

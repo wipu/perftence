@@ -28,17 +28,6 @@ public class ScheduleTestTaskTest {
         assertTrue(task.isTimeToRun(now));
     }
 
-    private static String timeToRun(final ScheduledTestTask task, final long scheduled, final long now) {
-        return "It should have been time to run! Now =" + now + " scheduled time=" + scheduled + ", timeItWasScheduled="
-                + task.timeItWasScheduledToBeRun();
-
-    }
-
-    private static String notTimeToRun(final ScheduledTestTask task, final long scheduled, final long now) {
-        return "It should not have been time to run! Now =" + now + " scheduled time=" + scheduled
-                + ", timeItWasScheduled=" + task.timeItWasScheduledToBeRun();
-    }
-
     @Test
     public void scheduleNow() {
         final long now = nanoTime();

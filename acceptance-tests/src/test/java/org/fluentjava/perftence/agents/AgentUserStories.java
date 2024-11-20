@@ -1,5 +1,8 @@
 package org.fluentjava.perftence.agents;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -13,7 +16,6 @@ import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import junit.framework.Assert;
 import junit.framework.AssertionFailedError;
 
 @RunWith(DefaultTestRunner.class)
@@ -192,7 +194,7 @@ public class AgentUserStories extends AbstractMultiThreadedTest {
 
             @Override
             public TestTask nextTaskIfAny() {
-                Assert.assertEquals("Running thread doesn't match !", this.currentThread, Thread.currentThread());
+                assertEquals(this.currentThread, Thread.currentThread());
                 return new SecondTask();
             }
 
@@ -343,7 +345,7 @@ public class AgentUserStories extends AbstractMultiThreadedTest {
                     if (value == 0) {
                         throw new FailIHave("Yoda: Fail I have...");
                     }
-                    Assert.fail("Yoda: Fail I have...");
+                    fail("Yoda: Fail I have...");
                 } else {
                     throw new FailIHave("Yoda: Fail I have...");
                 }

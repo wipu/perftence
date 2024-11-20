@@ -103,7 +103,7 @@ public final class DefaultInvocationStorage implements InvocationStorage {
 
             @Override
             public Statistics statistics() {
-                return Statistics.fromLatencies(new ArrayList<Integer>());
+                return Statistics.fromLatencies(new ArrayList<>());
             }
 
             @Override

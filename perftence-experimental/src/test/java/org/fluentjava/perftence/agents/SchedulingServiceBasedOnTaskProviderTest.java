@@ -1,9 +1,9 @@
 package org.fluentjava.perftence.agents;
 
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.fluentjava.perftence.TestFailureNotifier;
 import org.junit.jupiter.api.Test;
-
-import junit.framework.Assert;
 
 public class SchedulingServiceBasedOnTaskProviderTest {
 
@@ -28,7 +28,7 @@ public class SchedulingServiceBasedOnTaskProviderTest {
         }, 10, new TestFailureNotifier() {
             @Override
             public void testFailed(Throwable t) {
-                Assert.fail("Test failed : " + t.getMessage());
+                fail("Test failed : " + t.getMessage());
             }
         });
     }

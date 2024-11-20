@@ -147,7 +147,7 @@ public class ImageFactoryUsingJFreeChartTest {
 
             @Override
             public Statistics statistics() {
-                return Statistics.fromLatencies(new ArrayList<Integer>());
+                return Statistics.fromLatencies(new ArrayList<>());
             }
 
             @Override

@@ -12,7 +12,7 @@ public final class AdjustedFieldBuilder {
     }
 
     public AdjustedField<Double> field(final String name, final double value) {
-        return new AdjustedField<Double>() {
+        return new AdjustedField<>() {
 
             @Override
             public String name() {
@@ -32,7 +32,7 @@ public final class AdjustedFieldBuilder {
     }
 
     public AdjustedField<Long> field(final String name, final long value) {
-        return new AdjustedField<Long>() {
+        return new AdjustedField<>() {
 
             @Override
             public String name() {
@@ -52,7 +52,7 @@ public final class AdjustedFieldBuilder {
     }
 
     public AdjustedField<Integer> field(final String name, final int value) {
-        return new AdjustedField<Integer>() {
+        return new AdjustedField<>() {
 
             @Override
             public String name() {

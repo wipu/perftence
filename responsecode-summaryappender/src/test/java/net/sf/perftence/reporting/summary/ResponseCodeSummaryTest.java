@@ -44,7 +44,7 @@ public class ResponseCodeSummaryTest {
     }
 
     private static Summary<ResponseCodeSummaryTest> logSummary(final StringBuilder sb) {
-        return new Summary<ResponseCodeSummaryTest>() {
+        return new Summary<>() {
 
             @Override
             public Summary<ResponseCodeSummaryTest> text(final String text) {

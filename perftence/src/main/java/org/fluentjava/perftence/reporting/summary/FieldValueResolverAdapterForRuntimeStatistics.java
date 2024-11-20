@@ -11,7 +11,7 @@ public final class FieldValueResolverAdapterForRuntimeStatistics {
     }
 
     public FieldValueResolver<Long> forExecutionTime() {
-        return new FieldValueResolver<Long>() {
+        return new FieldValueResolver<>() {
             @Override
             public Long value() {
                 return statistics().currentDuration();
