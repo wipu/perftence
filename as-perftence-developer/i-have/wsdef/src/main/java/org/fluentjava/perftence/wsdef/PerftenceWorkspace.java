@@ -17,6 +17,7 @@ import org.fluentjava.iwant.api.model.Target;
 import org.fluentjava.iwant.api.wsdef.SideEffectDefinitionContext;
 import org.fluentjava.iwant.api.wsdef.TargetDefinitionContext;
 import org.fluentjava.iwant.api.wsdef.Workspace;
+import org.fluentjava.iwant.api.wsdef.WorkspaceContext;
 import org.fluentjava.iwant.core.download.TestedIwantDependencies;
 import org.fluentjava.iwant.eclipsesettings.EclipseSettings;
 import org.fluentjava.iwant.plugin.jacoco.JacocoDistribution;
@@ -24,7 +25,11 @@ import org.fluentjava.iwant.plugin.jacoco.JacocoTargetsOfJavaModules;
 
 public class PerftenceWorkspace implements Workspace {
 
-	private final PerftenceModules modules = new PerftenceModules();
+	private final PerftenceModules modules;
+
+	public PerftenceWorkspace(WorkspaceContext ctx) {
+		this.modules = new PerftenceModules(ctx);
+	}
 
 	@Override
 	public List<? extends Target> targets(TargetDefinitionContext ctx) {
@@ -64,10 +69,9 @@ public class PerftenceWorkspace implements Workspace {
 		return jacocoReport("jacoco-report-all", modules.modulesForJacoco());
 	}
 
-	private Target jacocoReport(String name,
+	private static Target jacocoReport(String name,
 			SortedSet<JavaSrcModule> interestingModules) {
-		return JacocoTargetsOfJavaModules.with()
-				.jacoco(jacoco())
+		return JacocoTargetsOfJavaModules.with().jacoco(jacoco())
 				.antJars(TestedIwantDependencies.antJar(),
 						TestedIwantDependencies.antLauncherJar())
 				.modules(interestingModules).end().jacocoReport(name);

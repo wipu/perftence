@@ -8,7 +8,7 @@ public class PerftenceWorkspaceFactory implements WorkspaceFactory {
 
 	@Override
 	public Workspace workspace(WorkspaceContext ctx) {
-		return new PerftenceWorkspace();
+		return new PerftenceWorkspace(ctx);
 	}
 
 }
