@@ -10,8 +10,7 @@ public class SummaryToCsv {
 
     public static CsvSummary convertToCsv(String summary) {
         try (StringReader reader = new StringReader(summary)) {
-            final BufferedReader br = new BufferedReader(reader);
-            try {
+            try (BufferedReader br = new BufferedReader(reader)) {
                 StringBuilder cols = new StringBuilder();
                 StringBuilder rows = new StringBuilder();
                 String line;
@@ -28,12 +27,6 @@ public class SummaryToCsv {
                         string2.substring(0, string2.length() - 1));
             } catch (IOException e) {
                 throw new PerftenceRuntimeException(e);
-            } finally {
-                try {
-                    br.close();
-                } catch (IOException e) {
-                    throw new PerftenceRuntimeException(e);
-                }
             }
         }
     }
