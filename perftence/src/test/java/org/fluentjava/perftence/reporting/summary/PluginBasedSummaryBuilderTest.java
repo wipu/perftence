@@ -1,11 +1,11 @@
 package org.fluentjava.perftence.reporting.summary;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.fluentjava.perftence.RuntimeStatisticsProvider;
 import org.fluentjava.perftence.formatting.FieldFormatter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,7 +26,7 @@ public class PluginBasedSummaryBuilderTest {
         }.register(plugin);
         final String summary = log(pluginBasedSummaryBuilder.build());
         assertNotNull("Summary was null!", summary);
-        assertTrue("execution time field is missing!", summary.contains("execution time (ms):     4444\n"));
+        assertTrue(summary.contains("execution time (ms):     4444\n"));
     }
 
     private static String log(final String summary) {

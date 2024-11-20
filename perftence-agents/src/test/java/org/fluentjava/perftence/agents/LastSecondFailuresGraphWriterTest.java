@@ -1,8 +1,8 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.fluentjava.perftence.TestTimeAware;
 import org.fluentjava.perftence.common.HtmlTestReport;
@@ -18,7 +18,7 @@ import org.fluentjava.perftence.reporting.summary.AdjustedFieldBuilderFactory;
 import org.fluentjava.perftence.reporting.summary.FailedInvocationsFactory;
 import org.fluentjava.perftence.reporting.summary.FieldAdjuster;
 import org.fluentjava.perftence.reporting.summary.LastSecondFailures;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LastSecondFailuresGraphWriterTest {
 

@@ -1,9 +1,10 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -19,8 +20,8 @@ import org.fluentjava.perftence.graph.jfreechart.DefaultDatasetAdapterFactory;
 import org.fluentjava.perftence.graph.jfreechart.TestRuntimeReporterFactoryUsingJFreeChart;
 import org.fluentjava.perftence.reporting.summary.SummaryConsumer;
 import org.fluentjava.perftence.reporting.summary.SummaryToCsv.CsvSummary;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -30,7 +31,7 @@ public final class AgentBasedTestTest {
     private Throwable testFailure;
     private AtomicInteger taskRun = new AtomicInteger();
 
-    @Before
+    @BeforeEach
     public void before() {
         taskRun().set(0);
     }
@@ -51,8 +52,8 @@ public final class AgentBasedTestTest {
                         // no impl
                     }
                 }).test("sanityCheck");
-        assertNotNull("Uuh, null returned by agent based test.test(id) method!", test);
-        assertEquals("Id doesn't match!", "sanityCheck", test.id());
+        assertNotNull(test);
+        assertEquals("sanityCheck", test.id());
         test.agents(failingAgent()).start();
         assertTrue(this.testFailed);
         assertTrue(this.testFailure.getClass().equals(MyFailure.class));
@@ -76,8 +77,8 @@ public final class AgentBasedTestTest {
                     }
 
                 }).test("noInvocationGraph").noInvocationGraph();
-        assertNotNull("Uuh, null returned by agent based test.test(id) method!", test);
-        assertEquals("Id doesn't match!", "noInvocationGraph", test.id());
+        assertNotNull(test);
+        assertEquals("noInvocationGraph", test.id());
         test.agents(failingAgent()).start();
         assertTrue(this.testFailed);
         assertTrue(this.testFailure.getClass().equals(MyFailure.class));
@@ -233,24 +234,26 @@ public final class AgentBasedTestTest {
         assertEquals(4, taskRun().get());
     }
 
+    @Test
     @SuppressWarnings({ "static-method", "unused" })
-    @Test(expected = TestFailureNotifier.NoTestNotifierException.class)
     public void nullNotifier() {
         final DefaultDatasetAdapterFactory adapterProvider = new DefaultDatasetAdapterFactory();
-        new AgentBasedTest(null, new DefaultLatencyProviderFactory(), testRuntimeReporterFactory(), adapterProvider,
-                adapterProvider, new SummaryConsumer() {
+        assertThrows(TestFailureNotifier.NoTestNotifierException.class, () -> {
+            new AgentBasedTest(null, new DefaultLatencyProviderFactory(), testRuntimeReporterFactory(), adapterProvider,
+                    adapterProvider, new SummaryConsumer() {
 
-                    @Override
-                    public void consumeSummary(String summaryId, CsvSummary convertToCsv) {
-                        // no impl
-                    }
+                        @Override
+                        public void consumeSummary(String summaryId, CsvSummary convertToCsv) {
+                            // no impl
+                        }
 
-                    @Override
-                    public void consumeSummary(String summaryId, String summary) {
-                        // no impl
-                    }
+                        @Override
+                        public void consumeSummary(String summaryId, String summary) {
+                            // no impl
+                        }
 
-                });
+                    });
+        });
     }
 
     private static TestRuntimeReporterFactory testRuntimeReporterFactory() {

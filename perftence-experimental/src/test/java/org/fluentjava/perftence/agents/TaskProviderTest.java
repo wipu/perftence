@@ -10,8 +10,8 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.fluentjava.perftence.TestFailureNotifier;
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class TaskProviderTest {
 
     private AtomicInteger tasksRun;
 
-    @Before
+    @BeforeEach
     public void before() {
         this.tasksRun = new AtomicInteger();
     }

@@ -1,10 +1,10 @@
 package org.fluentjava.perftence.agents;
 
 import static java.lang.Thread.sleep;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ScheduleTestTaskTest {
 
@@ -13,19 +13,19 @@ public class ScheduleTestTaskTest {
         long now = nanoTime();
         final long scheduled = now;
         final ScheduledTestTask task = new ScheduledTestTask(task(inMillis(250)), scheduled);
-        assertFalse(notTimeToRun(task, scheduled, now), task.isTimeToRun(now));
+        assertFalse(task.isTimeToRun(now));
         sleep(1);
         now = nanoTime();
-        assertFalse(notTimeToRun(task, scheduled, now), task.isTimeToRun(now));
+        assertFalse(task.isTimeToRun(now));
         sleep(100);
         now = nanoTime();
-        assertFalse(notTimeToRun(task, scheduled, now), task.isTimeToRun(now));
+        assertFalse(task.isTimeToRun(now));
         sleep(100);
         now = nanoTime();
-        assertFalse(notTimeToRun(task, scheduled, now), task.isTimeToRun(now));
+        assertFalse(task.isTimeToRun(now));
         sleep(50);
         now = nanoTime();
-        assertTrue(timeToRun(task, scheduled, now), task.isTimeToRun(now));
+        assertTrue(task.isTimeToRun(now));
     }
 
     private static String timeToRun(final ScheduledTestTask task, final long scheduled, final long now) {
@@ -42,14 +42,13 @@ public class ScheduleTestTaskTest {
     @Test
     public void scheduleNow() {
         final long now = nanoTime();
-        assertTrue("It should have been time to run!", new ScheduledTestTask(task(inMillis(0)), now).isTimeToRun(now));
+        assertTrue(new ScheduledTestTask(task(inMillis(0)), now).isTimeToRun(now));
     }
 
     @Test
     public void scheduleToPast() {
         final long now = nanoTime();
-        assertTrue("It should have been time to run!",
-                new ScheduledTestTask(task(inMillis(-100)), now).isTimeToRun(now));
+        assertTrue(new ScheduledTestTask(task(inMillis(-100)), now).isTimeToRun(now));
     }
 
     private static TestTask task(final Time when) {

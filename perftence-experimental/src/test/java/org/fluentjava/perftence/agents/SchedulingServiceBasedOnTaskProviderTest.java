@@ -1,7 +1,7 @@
 package org.fluentjava.perftence.agents;
 
 import org.fluentjava.perftence.TestFailureNotifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import junit.framework.Assert;
 

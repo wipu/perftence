@@ -209,7 +209,7 @@ public class PerftenceModules extends JavaModules {
 				.mainDeps(defaultPerftenceApiFactory(), junit, perftence(),
 						perftenceAgents(), perftenceApi(), perftenceFluent(),
 						slf4jApi)
-				.end());
+				.mainDeps(iwant5runnerMods).end());
 	}
 
 	private JavaSrcModule acceptanceTests() {

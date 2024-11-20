@@ -1,12 +1,12 @@
 package net.sf.perftence.reporting.summary;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.text.DecimalFormat;
 
 import org.fluentjava.perftence.reporting.summary.ResponseCodeSummary;
 import org.fluentjava.perftence.reporting.summary.Summary;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ResponseCodeSummaryTest {
     private final static DecimalFormat DF = new DecimalFormat("###.###");

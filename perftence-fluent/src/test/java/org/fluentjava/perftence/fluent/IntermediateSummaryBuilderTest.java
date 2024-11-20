@@ -1,8 +1,8 @@
 package org.fluentjava.perftence.fluent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DecimalFormat;
 import java.util.Collection;
@@ -20,7 +20,7 @@ import org.fluentjava.perftence.reporting.summary.IntermediateSummary;
 import org.fluentjava.perftence.reporting.summary.SummaryAppender;
 import org.fluentjava.perftence.reporting.summary.SummaryFieldFactory;
 import org.fluentjava.perftence.setup.PerformanceTestSetup;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -35,16 +35,15 @@ public class IntermediateSummaryBuilderTest {
                 newSummaryFieldFactory(), new EstimatedInvocations());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("samples field is missing!", build.contains("samples:                 248/286 (estimated)\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentage field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("threads field is missing!", build.contains("threads:                 10\n"));
-        assertTrue("estimated time left field is missing!", build.contains("estimated time left:     2 (sec)\n"));
+        assertTrue(build.contains("samples:                 248/286 (estimated)\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("threads:                 10\n"));
+        assertTrue(build.contains("estimated time left:     2 (sec)\n"));
 
         final String expected = "" + "samples:                 248/286 (estimated)\n" + "max:                     998\n"
                 + "average:                 " + DF.format(508.38) + "\n" + "median:                  488\n"
@@ -60,18 +59,17 @@ public class IntermediateSummaryBuilderTest {
                 newSummaryFieldFactory(), new EstimatedInvocations()).customSummaryProviders(customProvider());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("samples field is missing!", build.contains("samples:                 248/286 (estimated)\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentage field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("threads field is missing!", build.contains("threads:                 10\n"));
-        assertTrue("estimated time left field is missing!", build.contains("estimated time left:     2 (sec)\n"));
-        assertTrue("custom text is missing!", build.contains("some text\n"));
-        assertTrue("custom field 'done' is missing!", build.contains("done:                    100\n"));
+        assertTrue(build.contains("samples:                 248/286 (estimated)\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("threads:                 10\n"));
+        assertTrue(build.contains("estimated time left:     2 (sec)\n"));
+        assertTrue(build.contains("some text\n"));
+        assertTrue(build.contains("done:                    100\n"));
         final String expected = "" + "samples:                 248/286 (estimated)\n" + "max:                     998\n"
                 + "average:                 " + DF.format(508.38) + "\n" + "median:                  488\n"
                 + "95 percentile:           955\n" + "throughput:              " + DF.format(19.08) + "\n"
@@ -86,17 +84,15 @@ public class IntermediateSummaryBuilderTest {
                 newSummaryFieldFactory(), new EstimatedInvocations());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("samples field is missing!", build.contains("samples:                 248/286\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentage field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("threads field is missing!", build.contains("threads:                 10\n"));
-        assertTrue("estimated time left field is missing!",
-                build.contains("estimated time left:     " + DF.format(1.99) + " (sec)\n"));
+        assertTrue(build.contains("samples:                 248/286\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("threads:                 10\n"));
+        assertTrue(build.contains("estimated time left:     " + DF.format(1.99) + " (sec)\n"));
 
         final String expected = "samples:                 248/286\n" + "max:                     998\n"
                 + "average:                 " + DF.format(508.38) + "\n" + "median:                  488\n"
@@ -112,19 +108,17 @@ public class IntermediateSummaryBuilderTest {
                 newSummaryFieldFactory(), new EstimatedInvocations()).customSummaryProviders(customProvider());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("samples field is missing!", build.contains("samples:                 248/286\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentage field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("threads field is missing!", build.contains("threads:                 10\n"));
-        assertTrue("estimated time left field is missing!",
-                build.contains("estimated time left:     " + DF.format(1.99) + " (sec)\n"));
-        assertTrue("custom text is missing!", build.contains("some text\n"));
-        assertTrue("custom field 'done' is missing!", build.contains("done:                    100\n"));
+        assertTrue(build.contains("samples:                 248/286\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("threads:                 10\n"));
+        assertTrue(build.contains("estimated time left:     " + DF.format(1.99) + " (sec)\n"));
+        assertTrue(build.contains("some text\n"));
+        assertTrue(build.contains("done:                    100\n"));
 
         final String expected = "samples:                 248/286\n" + "max:                     998\n"
                 + "average:                 " + DF.format(508.38) + "\n" + "median:                  488\n"

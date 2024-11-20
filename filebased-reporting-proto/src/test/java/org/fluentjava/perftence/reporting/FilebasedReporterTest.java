@@ -22,7 +22,7 @@ import org.fluentjava.perftence.reporting.summary.AdjustedFieldBuilderFactory;
 import org.fluentjava.perftence.reporting.summary.FailedInvocationsFactory;
 import org.fluentjava.perftence.reporting.summary.FieldAdjuster;
 import org.fluentjava.perftence.setup.PerformanceTestSetup;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(DefaultTestRunner.class)

@@ -7,7 +7,7 @@ import org.fluentjava.perftence.fluent.TestBuilder;
 import org.fluentjava.perftence.junit.AbstractMultiThreadedTest;
 import org.fluentjava.perftence.junit.DefaultTestRunner;
 import org.fluentjava.perftence.reporting.Duration;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runner.RunWith;
 
 @RunWith(DefaultTestRunner.class)

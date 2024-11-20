@@ -1,9 +1,9 @@
 package org.fluentjava.perftence.junit;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.fluentjava.perftence.TestFailureNotifier;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.junit.runners.model.InitializationError;
 
 public class DefaultTestRunnerTest {

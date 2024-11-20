@@ -1,8 +1,8 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.text.DecimalFormat;
 
@@ -13,7 +13,7 @@ import org.fluentjava.perftence.reporting.summary.CustomIntermediateSummaryProvi
 import org.fluentjava.perftence.reporting.summary.FieldAdjuster;
 import org.fluentjava.perftence.reporting.summary.IntermediateSummary;
 import org.fluentjava.perftence.reporting.summary.SummaryFieldFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,18 +27,17 @@ public class IntermediateSummaryBuilderTest implements TestFailureNotifier {
                 scheduledTasks(), failureNotifier(false), newSummaryFieldFactory());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("finished tasks field is missing!", build.contains("finished tasks:          248\n"));
-        assertTrue("scheduled tasks field is missing!", build.contains("scheduled tasks:         1000\n"));
-        assertTrue("failed tasks field is missing!", build.contains("failed tasks:            0\n"));
-        assertTrue("threads field is missing!", build.contains("threads running tasks:   100\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentile field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("last task to be run field is missing!", build.contains("last task to be run:     in 2000 (ms)\n"));
+        assertTrue(build.contains("finished tasks:          248\n"));
+        assertTrue(build.contains("scheduled tasks:         1000\n"));
+        assertTrue(build.contains("failed tasks:            0\n"));
+        assertTrue(build.contains("threads running tasks:   100\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("last task to be run:     in 2000 (ms)\n"));
         final String expected = "" + "finished tasks:          248\n" + "scheduled tasks:         1000\n"
                 + "failed tasks:            0\n" + "threads running tasks:   100\n" + "max:                     998\n"
                 + "average:                 " + DF.format(508.38) + "\n" + "median:                  488\n"
@@ -53,18 +52,17 @@ public class IntermediateSummaryBuilderTest implements TestFailureNotifier {
                 scheduledTasks(), failureNotifier(true), newSummaryFieldFactory());
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("finished tasks field is missing!", build.contains("finished tasks:          248\n"));
-        assertTrue("scheduled tasks field is missing!", build.contains("scheduled tasks:         1000\n"));
-        assertTrue("failed tasks field is missing!", build.contains("failed tasks:            1\n"));
-        assertTrue("threads field is missing!", build.contains("threads running tasks:   100\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentile field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("last task to be run field is missing!", build.contains("last task to be run:     in 2000 (ms)\n"));
+        assertTrue(build.contains("finished tasks:          248\n"));
+        assertTrue(build.contains("scheduled tasks:         1000\n"));
+        assertTrue(build.contains("failed tasks:            1\n"));
+        assertTrue(build.contains("threads running tasks:   100\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("last task to be run:     in 2000 (ms)\n"));
 
         final String expected = "" + "finished tasks:          248\n" + "scheduled tasks:         1000\n"
                 + "failed tasks:            1\n" + "threads running tasks:   100\n" + "max:                     998\n"
@@ -87,18 +85,17 @@ public class IntermediateSummaryBuilderTest implements TestFailureNotifier {
         builder.customSummaryProviders(customSummaryProvider);
         final String build = log(builder.build());
         assertNotNull("Summary was null!", build);
-        assertTrue("finished tasks field is missing!", build.contains("finished tasks:          248\n"));
-        assertTrue("scheduled tasks field is missing!", build.contains("scheduled tasks:         1000\n"));
-        assertTrue("failed tasks field is missing!", build.contains("failed tasks:            1\n"));
-        assertTrue("threads field is missing!", build.contains("threads running tasks:   100\n"));
-        assertTrue("max field is missing!", build.contains("max:                     998\n"));
-        assertTrue("average field is missing!", build.contains("average:                 " + DF.format(508.38) + "\n"));
-        assertTrue("median field is missing!", build.contains("median:                  488\n"));
-        assertTrue("95 percentile field is missing!", build.contains("95 percentile:           955\n"));
-        assertTrue("throughput field is missing!",
-                build.contains("throughput:              " + DF.format(19.08) + "\n"));
-        assertTrue("execution time field is missing!", build.contains("execution time (ms):     13000\n"));
-        assertTrue("last task to be run field is missing!", build.contains("last task to be run:     in 2000 (ms)\n"));
+        assertTrue(build.contains("finished tasks:          248\n"));
+        assertTrue(build.contains("scheduled tasks:         1000\n"));
+        assertTrue(build.contains("failed tasks:            1\n"));
+        assertTrue(build.contains("threads running tasks:   100\n"));
+        assertTrue(build.contains("max:                     998\n"));
+        assertTrue(build.contains("average:                 " + DF.format(508.38) + "\n"));
+        assertTrue(build.contains("median:                  488\n"));
+        assertTrue(build.contains("95 percentile:           955\n"));
+        assertTrue(build.contains("throughput:              " + DF.format(19.08) + "\n"));
+        assertTrue(build.contains("execution time (ms):     13000\n"));
+        assertTrue(build.contains("last task to be run:     in 2000 (ms)\n"));
 
         final String expected = "" + "finished tasks:          248\n" + "scheduled tasks:         1000\n"
                 + "failed tasks:            1\n" + "threads running tasks:   100\n" + "max:                     998\n"

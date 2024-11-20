@@ -1,27 +1,32 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.fluentjava.perftence.DefaultLatencyProviderFactory;
 import org.fluentjava.perftence.LatencyProvider;
 import org.fluentjava.perftence.reporting.TestRuntimeReporter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class CategorySpecificLatenciesTest implements ReporterFactoryForCategorySpecificLatencies {
 
+    @Test
     @SuppressWarnings("unused")
-    @Test(expected = NullPointerException.class)
     public void reporterFactoryNull() {
-        new CategorySpecificLatencies(null, this);
+        assertThrows(NullPointerException.class, () -> {
+            new CategorySpecificLatencies(null, this);
+        });
     }
 
+    @Test
     @SuppressWarnings({ "unused", "static-method" })
-    @Test(expected = NullPointerException.class)
     public void invocationReporterNull() {
-        new CategorySpecificLatencies(
-                new DefaultCategorySpecificReporterFactory("id", new DefaultLatencyProviderFactory()), null);
+        assertThrows(NullPointerException.class, () -> {
+            new CategorySpecificLatencies(
+                    new DefaultCategorySpecificReporterFactory("id", new DefaultLatencyProviderFactory()), null);
+        });
     }
 
     @Test

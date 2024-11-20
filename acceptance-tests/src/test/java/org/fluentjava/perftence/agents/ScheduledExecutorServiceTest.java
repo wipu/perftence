@@ -1,6 +1,6 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
@@ -11,7 +11,7 @@ import org.fluentjava.perftence.common.HtmlTestReport;
 import org.fluentjava.perftence.graph.jfreechart.DefaultDatasetAdapterFactory;
 import org.fluentjava.perftence.graph.jfreechart.ImageFactoryUsingJFreeChart;
 import org.fluentjava.perftence.graph.jfreechart.JFreeChartWriter;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

@@ -5,24 +5,24 @@ import org.fluentjava.perftence.api.DefaultPerftenceApiFactory;
 import org.fluentjava.perftence.api.PerftenceApi;
 import org.fluentjava.perftence.fluent.PerformanceRequirementsPojo.PerformanceRequirementsBuilder;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo.PerformanceTestSetupBuilder;
-import org.junit.Rule;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.TestInfo;
 
 public abstract class AbstractMultiThreadedTest {
 
     private static TestFailureNotifier failureNotifier;
     private final FullyQualifiedMethodNameWithClassName idFactory = new FullyQualifiedMethodNameWithClassName();
     private final PerftenceApi perftenceApi;
+    private String testMethodName;
 
     public AbstractMultiThreadedTest() {
         this.perftenceApi = new DefaultPerftenceApiFactory().newPerftenceApi(failureNotifier());
     }
 
-    /**
-     * Rule used for tracking the test name
-     */
-    @Rule
-    public TestName name = new TestName();
+    @BeforeEach
+    public void before(TestInfo info) {
+        this.testMethodName = info.getTestMethod().get().getName();
+    }
 
     /**
      * Uses fully qualified method name (with class name) as the name of the
@@ -72,12 +72,8 @@ public abstract class AbstractMultiThreadedTest {
         return this.idFactory;
     }
 
-    protected final String testMethodName() {
-        return testName().getMethodName();
-    }
-
-    private TestName testName() {
-        return this.name;
+    protected String testMethodName() {
+        return this.testMethodName;
     }
 
     protected PerformanceRequirementsBuilder requirements() {

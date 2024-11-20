@@ -1,6 +1,6 @@
 package org.fluentjava.perftence.api;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.fluentjava.perftence.TestFailureNotifier;
 import org.fluentjava.perftence.common.DefaultTestRuntimeReporterFactory;
@@ -9,7 +9,7 @@ import org.fluentjava.perftence.graph.jfreechart.TestRuntimeReporterFactoryUsing
 import org.fluentjava.perftence.reporting.TestReport;
 import org.fluentjava.perftence.reporting.summary.SummaryConsumer;
 import org.fluentjava.perftence.reporting.summary.SummaryToCsv.CsvSummary;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public final class PerftenceApiTest implements TestFailureNotifier {
 

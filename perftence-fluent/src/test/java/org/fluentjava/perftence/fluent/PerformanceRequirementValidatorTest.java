@@ -1,10 +1,12 @@
 package org.fluentjava.perftence.fluent;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import org.fluentjava.perftence.PerfTestFailure;
 import org.fluentjava.perftence.PerfTestFailureFactory;
 import org.fluentjava.perftence.PerformanceRequirements;
 import org.fluentjava.perftence.StatisticsProvider;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PerformanceRequirementValidatorTest {
 
@@ -63,7 +65,7 @@ public class PerformanceRequirementValidatorTest {
         validator.checkAllRequirements("maxLatencyFailed", 0);
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void maxLatencyFailed() {
         final PerformanceRequirements requirements = PerformanceRequirementsPojo.builder().max(50).build();
         final StatisticsProvider statisticsProvider = new StatisticsProvider() {
@@ -113,10 +115,12 @@ public class PerformanceRequirementValidatorTest {
                 return 0;
             }
         };
-        newValidator(requirements, statisticsProvider).checkRuntimeLatency("maxLatencyFailed", 500);
+        assertThrows(PerfTestFailure.class, () -> {
+            newValidator(requirements, statisticsProvider).checkRuntimeLatency("maxLatencyFailed", 500);
+        });
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void averageFailed() {
         final PerformanceRequirements requirements = PerformanceRequirementsPojo.builder().average(100).build();
         final StatisticsProvider statisticsProvider = new StatisticsProvider() {
@@ -166,10 +170,12 @@ public class PerformanceRequirementValidatorTest {
                 return 101;
             }
         };
-        newValidator(requirements, statisticsProvider).checkAllRequirements("averageFailed", 1000);
+        assertThrows(PerfTestFailure.class, () -> {
+            newValidator(requirements, statisticsProvider).checkAllRequirements("averageFailed", 1000);
+        });
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void throughputFailed() {
         final PerformanceRequirements requirements = PerformanceRequirementsPojo.builder().throughput(100).build();
         final StatisticsProvider statisticsProvider = new StatisticsProvider() {
@@ -219,10 +225,12 @@ public class PerformanceRequirementValidatorTest {
                 return 101;
             }
         };
-        newValidator(requirements, statisticsProvider).checkAllRequirements("throughputFailed", 10000);
+        assertThrows(PerfTestFailure.class, () -> {
+            newValidator(requirements, statisticsProvider).checkAllRequirements("throughputFailed", 10000);
+        });
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void totalTimeFailed() {
         final PerformanceRequirements requirements = PerformanceRequirementsPojo.builder().totalTime(10000).build();
         final StatisticsProvider statisticsProvider = new StatisticsProvider() {
@@ -272,10 +280,12 @@ public class PerformanceRequirementValidatorTest {
                 return 101;
             }
         };
-        newValidator(requirements, statisticsProvider).checkAllRequirements("totalTimeFailed", 10001);
+        assertThrows(PerfTestFailure.class, () -> {
+            newValidator(requirements, statisticsProvider).checkAllRequirements("totalTimeFailed", 10001);
+        });
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void medianFailed() {
         final PerformanceRequirements requirements = PerformanceRequirementsPojo.builder().median(100).build();
         final StatisticsProvider statisticsProvider = new StatisticsProvider() {
@@ -325,7 +335,9 @@ public class PerformanceRequirementValidatorTest {
                 return 101;
             }
         };
-        newValidator(requirements, statisticsProvider).checkAllRequirements("medianFailed", 10001);
+        assertThrows(PerfTestFailure.class, () -> {
+            newValidator(requirements, statisticsProvider).checkAllRequirements("medianFailed", 10001);
+        });
     }
 
     @Test

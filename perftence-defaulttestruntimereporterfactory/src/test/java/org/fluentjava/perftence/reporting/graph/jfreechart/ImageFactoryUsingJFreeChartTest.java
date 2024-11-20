@@ -19,11 +19,12 @@ import org.fluentjava.perftence.graph.jfreechart.DefaultDatasetAdapterFactory;
 import org.fluentjava.perftence.graph.jfreechart.ImageFactoryUsingJFreeChart;
 import org.fluentjava.perftence.graph.jfreechart.JFreeChartWriter;
 import org.fluentjava.perftence.graph.jfreechart.ScatterPlotGraphData;
-import org.junit.BeforeClass;
-import org.junit.Ignore;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,13 +33,20 @@ public class ImageFactoryUsingJFreeChartTest {
     private static final Random RANDOM = new Random(System.currentTimeMillis());
     private static ImageFactoryUsingJFreeChart imageFactory;
 
-    @Rule
-    public TestName name = new TestName();
-
-    @BeforeClass
+    @BeforeAll
     public static void beforeClass() {
         imageFactory = new ImageFactoryUsingJFreeChart(
                 new JFreeChartWriter(HtmlTestReport.withDefaultReportPath().reportRootDirectory()));
+    }
+
+    @BeforeEach
+    public void before(TestInfo info) {
+        log().info("Start {}", info.getDisplayName());
+    }
+
+    @AfterEach
+    public void after(TestInfo info) {
+        log().info("Done {}", info.getDisplayName());
     }
 
     private static InvocationStorage newDefaultInvocationStorage(final int value) {
@@ -63,62 +71,32 @@ public class ImageFactoryUsingJFreeChartTest {
     @Test
     public void createImageWithStatistics() throws Exception {
         ImageData imageData = newDefaultInvocationStorage(storageSize()).imageData();
-        start();
         imageFactory().createXYLineChart(id("with-statistics"), imageData);
-        done();
     }
 
-    @Ignore
+    @Disabled
     @Test
     public void hugeDataSet() {
         ImageData imageData = newDefaultInvocationStorage(20000000).imageData();
-        start();
         imageFactory().createXYLineChart(id("huge-with-statistics"), imageData);
-        done();
-    }
-
-    private void done() {
-        log().info("Done: {}", fullyQualifiedMethodNameWithClassName());
-    }
-
-    private String fullyQualifiedMethodNameWithClassName() {
-        return this.getClass().toString() + "-" + id();
-    }
-
-    private String id() {
-        return testName().getMethodName();
-    }
-
-    private TestName testName() {
-        return this.name;
-    }
-
-    private void start() {
-        log().info("Start: {}", fullyQualifiedMethodNameWithClassName());
     }
 
     @Test
     public void createImageWithoutStatistics() throws Exception {
         ImageData imageDataWithoutStatistics = imageDataWithoutStatistics();
-        start();
         imageFactory().createXYLineChart(id("without-statistics"), imageDataWithoutStatistics);
-        done();
     }
 
     @Test
     public void createBarChart() {
         ImageData imageDataWithoutStatistics = imageDataWithSmallAmountOfData();
-        start();
         imageFactory().createBarChart(id("barchart-without-statistics"), imageDataWithoutStatistics);
-        done();
     }
 
     @Test
     public void createScatterPlot() {
         ImageData imageDataWithoutStatistics = imageDataForScatterPlot();
-        start();
         imageFactory().createScatterPlot(id("scatterplot-without-statistics"), imageDataWithoutStatistics);
-        done();
     }
 
     private static ImageData imageDataForScatterPlot() {

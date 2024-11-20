@@ -1,10 +1,10 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.TimeUnit;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class TimespecificationFactoryTest {
 

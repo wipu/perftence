@@ -1,49 +1,64 @@
 package org.fluentjava.perftence.setup;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import org.fluentjava.perftence.graph.GraphWriter;
 import org.fluentjava.perftence.graph.ImageFactory;
 import org.fluentjava.perftence.reporting.summary.Summary;
 import org.fluentjava.perftence.reporting.summary.SummaryAppender;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PerformanceTestSetupPojoTest {
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupDuration() {
-        PerformanceTestSetupPojo.builder().noSetup().duration();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().duration();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupGraphWriters() {
-        PerformanceTestSetupPojo.builder().noSetup().graphWriters();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().graphWriters();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupInvocationRange() {
-        PerformanceTestSetupPojo.builder().noSetup().invocationRange();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().invocationRange();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupInvocations() {
-        PerformanceTestSetupPojo.builder().noSetup().invocations();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().invocations();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupSummaryAppenders() {
-        PerformanceTestSetupPojo.builder().noSetup().summaryAppenders();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().summaryAppenders();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupThreads() {
-        PerformanceTestSetupPojo.builder().noSetup().threads();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().threads();
+        });
     }
 
-    @Test(expected = NoTestSetupDefined.class)
+    @Test
     public void noSetupThroughputRange() {
-        PerformanceTestSetupPojo.builder().noSetup().throughputRange();
+        assertThrows(NoTestSetupDefined.class, () -> {
+            PerformanceTestSetupPojo.builder().noSetup().throughputRange();
+        });
     }
 
     @Test

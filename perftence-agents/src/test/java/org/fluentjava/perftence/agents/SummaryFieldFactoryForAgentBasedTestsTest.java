@@ -1,13 +1,13 @@
 package org.fluentjava.perftence.agents;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.fluentjava.perftence.formatting.FieldFormatter;
 import org.fluentjava.perftence.reporting.summary.FieldAdjuster;
 import org.fluentjava.perftence.reporting.summary.SummaryField;
 import org.fluentjava.perftence.reporting.summary.SummaryFieldFactory;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SummaryFieldFactoryForAgentBasedTestsTest {
 

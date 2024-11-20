@@ -1,12 +1,12 @@
 package org.fluentjava.perftence.fluent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import org.fluentjava.perftence.PercentileRequirement;
 import org.fluentjava.perftence.PerformanceRequirements;
 import org.fluentjava.perftence.fluent.PerformanceRequirementsPojo.PerformanceRequirementsBuilder;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PerformanceRequirementsPojoTest {
 

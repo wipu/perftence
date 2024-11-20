@@ -1,10 +1,11 @@
 package org.fluentjava.perftence.fluent;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Random;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -20,21 +21,19 @@ import org.fluentjava.perftence.graph.jfreechart.TestRuntimeReporterFactoryUsing
 import org.fluentjava.perftence.reporting.Duration;
 import org.fluentjava.perftence.reporting.summary.SummaryConsumer;
 import org.fluentjava.perftence.reporting.summary.SummaryToCsv.CsvSummary;
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.TestName;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.TestInfo;
 
 public class FluentPerformanceTestTest {
 
+    private TestInfo info;
     private boolean testFailed;
     private Throwable testFailure;
 
-    @Rule
-    public TestName name = new TestName();
-
-    @Before
-    public void before() {
+    @BeforeEach
+    public void before(TestInfo info) {
+        this.info = info;
         this.testFailed = false;
         this.testFailure = null;
     }
@@ -64,27 +63,27 @@ public class FluentPerformanceTestTest {
                         Thread.sleep(10);
                     }
                 });
-        assertNotNull("Uuh, null returned by fluent based test.test(id).setup(..).executable(..) method!", test);
+        assertNotNull(test);
         test.start();
         assertFalse(this.testFailed);
         assertNull(this.testFailure);
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void requirementFailed() {
         final AtomicInteger i = new AtomicInteger();
         final FluentPerformanceTest fluent = fluent();
-        fluent.test(id()).setup(fluent.setup().threads(1).invocations(2).build())
-                .requirements(fluent.requirements().max(200).build()).executable(new Executable() {
-                    @Override
-                    public void execute() throws Exception {
-                        i.incrementAndGet();
-                        // 201 will fail constantly in windows
-                        Thread.sleep(i.intValue() == 1 ? 100 : 202);
-                    }
-                }).start();
-        assertTrue(this.testFailed);
-        assertNotNull(this.testFailure);
+        assertThrows(PerfTestFailure.class, () -> {
+            fluent.test(id()).setup(fluent.setup().threads(1).invocations(2).build())
+                    .requirements(fluent.requirements().max(200).build()).executable(new Executable() {
+                        @Override
+                        public void execute() throws Exception {
+                            i.incrementAndGet();
+                            // 201 will fail constantly in windows
+                            Thread.sleep(i.intValue() == 1 ? 100 : 202);
+                        }
+                    }).start();
+        });
     }
 
     @Test
@@ -101,18 +100,18 @@ public class FluentPerformanceTestTest {
         assertNull(this.testFailure);
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void percentile95RequirementFails() {
         final FluentPerformanceTest fluent = fluent();
-        fluent.test(id()).setup(fluent.setup().threads(1).invocations(5).build())
-                .requirements(fluent.requirements().percentile95(50).build()).executable(new Executable() {
-                    @Override
-                    public void execute() throws Exception {
-                        Thread.sleep(100);
-                    }
-                }).start();
-        assertTrue(this.testFailed);
-        assertNotNull(this.testFailure);
+        assertThrows(PerfTestFailure.class, () -> {
+            fluent.test(id()).setup(fluent.setup().threads(1).invocations(5).build())
+                    .requirements(fluent.requirements().percentile95(50).build()).executable(new Executable() {
+                        @Override
+                        public void execute() throws Exception {
+                            Thread.sleep(100);
+                        }
+                    }).start();
+        });
     }
 
     @Test
@@ -167,38 +166,44 @@ public class FluentPerformanceTestTest {
         assertNull(this.testFailure);
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void noTestSetup() {
-        fluent().test(id()).executable(new Executable() {
+        assertThrows(RuntimeException.class, () -> {
+            fluent().test(id()).executable(new Executable() {
 
-            @Override
-            public void execute() throws Exception {
-                Thread.sleep(100);
-            }
-        }).start();
+                @Override
+                public void execute() throws Exception {
+                    Thread.sleep(100);
+                }
+            }).start();
+        });
     }
 
-    @Test(expected = RuntimeException.class)
+    @Test
     public void noSetup() {
         final FluentPerformanceTest fluent = fluent();
-        fluent.test(id()).setup(fluent.setup().noSetup()).executable(new Executable() {
-            @Override
-            public void execute() throws Exception {
-                Thread.sleep(100);
-            }
-        }).start();
+        assertThrows(RuntimeException.class, () -> {
+            fluent.test(id()).setup(fluent.setup().noSetup()).executable(new Executable() {
+                @Override
+                public void execute() throws Exception {
+                    Thread.sleep(100);
+                }
+            }).start();
+        });
     }
 
-    @Test(expected = PerfTestFailure.class)
+    @Test
     public void invalidTestSetup() {
         final FluentPerformanceTest fluent = fluent();
-        fluent.test(id()).setup(fluent.setup().build()).executable(new Executable() {
+        assertThrows(PerfTestFailure.class, () -> {
+            fluent.test(id()).setup(fluent.setup().build()).executable(new Executable() {
 
-            @Override
-            public void execute() throws Exception {
-                Thread.sleep(100);
-            }
-        }).start();
+                @Override
+                public void execute() throws Exception {
+                    Thread.sleep(100);
+                }
+            }).start();
+        });
     }
 
     @Test
@@ -335,22 +340,24 @@ public class FluentPerformanceTestTest {
     }
 
     @SuppressWarnings({ "unused" })
-    @Test(expected = TestFailureNotifier.NoTestNotifierException.class)
+    @Test
     public void nullNotifier() {
-        new FluentPerformanceTest(null, newDefaultTestRuntimeReporter(), new DefaultRunNotifier(),
-                new DefaultDatasetAdapterFactory(), new SummaryConsumer() {
+        assertThrows(TestFailureNotifier.NoTestNotifierException.class, () -> {
+            new FluentPerformanceTest(null, newDefaultTestRuntimeReporter(), new DefaultRunNotifier(),
+                    new DefaultDatasetAdapterFactory(), new SummaryConsumer() {
 
-                    @Override
-                    public void consumeSummary(String summaryId, CsvSummary convertToCsv) {
-                        // no impl
-                    }
+                        @Override
+                        public void consumeSummary(String summaryId, CsvSummary convertToCsv) {
+                            // no impl
+                        }
 
-                    @Override
-                    public void consumeSummary(String summaryId, String summary) {
-                        // no impl
-                    }
+                        @Override
+                        public void consumeSummary(String summaryId, String summary) {
+                            // no impl
+                        }
 
-                });
+                    });
+        });
     }
 
     @Test
@@ -368,10 +375,8 @@ public class FluentPerformanceTestTest {
                     }
                 });
         final TestBuilder startable = fluent.test("root").noInvocationGraph().startable(durationWorker);
-        assertFalse("includeInvocationGraph should have been 'false' for MultithreadTestWorkerBuilder!",
-                startable.includeInvocationGraph());
-        assertFalse("includeInvocationGraph should have been 'false' for MultithreadWorker!",
-                durationWorker.includeInvocationGraph());
+        assertFalse(startable.includeInvocationGraph());
+        assertFalse(durationWorker.includeInvocationGraph());
         startable.start();
         assertTrue(executed.get());
     }
@@ -467,10 +472,7 @@ public class FluentPerformanceTestTest {
     }
 
     private String id() {
-        return testName().getMethodName();
+        return this.info.getDisplayName();
     }
 
-    private TestName testName() {
-        return this.name;
-    }
 }

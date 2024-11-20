@@ -1,19 +1,25 @@
 package org.fluentjava.perftence;
 
-import org.junit.Test;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class LatencyProviderTest {
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void tooHastyNotEventStarted() {
-        newLatencyProvider().throughput();
+        assertThrows(IllegalStateException.class, () -> {
+            newLatencyProvider().throughput();
+        });
     }
 
-    @Test(expected = IllegalStateException.class)
+    @Test
     public void tooHastyStartedButNotStopped() {
         final LatencyProvider provider = newLatencyProvider();
         provider.start();
-        provider.throughput();
+        assertThrows(IllegalStateException.class, () -> {
+            provider.throughput();
+        });
     }
 
     private static LatencyProvider newLatencyProvider() {

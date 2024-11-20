@@ -1,8 +1,8 @@
 package org.fluentjava.perftence.reporting;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -13,7 +13,7 @@ import java.io.ObjectOutputStream;
 
 import org.fluentjava.perftence.setup.PerformanceTestSetup;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FilebasedTestSetupTest {
 
