@@ -123,7 +123,8 @@ public abstract class AbstractTestRunner extends BlockJUnit4ClassRunner implemen
     @Override
     @Deprecated
     /**
-     * classes with no tests are allowed because we might filter some of them out.
+     * classes with no tests are allowed because we might filter some of them
+     * out.
      */
     protected void validateInstanceMethods(final List<Throwable> errors) {
         validatePublicVoidNoArgMethods(After.class, false, errors);
@@ -141,7 +142,8 @@ public abstract class AbstractTestRunner extends BlockJUnit4ClassRunner implemen
     }
 
     /**
-     * Here the extending class can effect which methods (or all) will be executed.
+     * Here the extending class can effect which methods (or all) will be
+     * executed.
      */
     protected abstract void processTestMethods(final List<FrameworkMethod> methods);
 

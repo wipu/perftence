@@ -25,8 +25,8 @@ public abstract class AbstractMultiThreadedTest {
     public TestName name = new TestName();
 
     /**
-     * Uses fully qualified method name (with class name) as the name of the agent
-     * test
+     * Uses fully qualified method name (with class name) as the name of the
+     * agent test
      */
     protected final org.fluentjava.perftence.agents.TestBuilder agentBasedTest() {
         return agentBasedTest(id());
