@@ -65,7 +65,7 @@ public class FluentUserStories extends AbstractMultiThreadedTest {
             executor().execute();
             i.incrementAndGet();
         }).start();
-        assertEquals( 10, i.get());
+        assertEquals(10, i.get());
     }
 
     @Test

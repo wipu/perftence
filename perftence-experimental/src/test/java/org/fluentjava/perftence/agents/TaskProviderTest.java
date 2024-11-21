@@ -72,7 +72,7 @@ public class TaskProviderTest {
             @Override
             public void run(TestTaskReporter reporter) throws Exception {
                 log().debug("runnning task2");
-                assertEquals( 1, TaskProviderTest.this.tasksRun.intValue());
+                assertEquals(1, TaskProviderTest.this.tasksRun.intValue());
                 TaskProviderTest.this.tasksRun.incrementAndGet();
                 log().debug("task2 done");
             }
@@ -98,8 +98,7 @@ public class TaskProviderTest {
             @Override
             public void run(TestTaskReporter reporter) throws Exception {
                 log().debug("runnning task1");
-                assertEquals( 0,
-                        TaskProviderTest.this.tasksRun.intValue());
+                assertEquals(0, TaskProviderTest.this.tasksRun.intValue());
                 log().debug("Sleeping...");
                 sleep(sleep);
                 TaskProviderTest.this.tasksRun.incrementAndGet();
@@ -218,7 +217,7 @@ public class TaskProviderTest {
     }
 
     private void assertForNextTasks(final int tasks) {
-        assertEquals( tasks * 2, this.tasksRun.intValue());
+        assertEquals(tasks * 2, this.tasksRun.intValue());
     }
 
     private static void interruptAndJoin(final List<Thread> threads) throws InterruptedException {
@@ -280,7 +279,7 @@ public class TaskProviderTest {
         Thread.sleep(3000);
         log().debug("Temporary ugly stop");
         interruptAndJoin(threads);
-        assertEquals( tasks, this.tasksRun.intValue());
+        assertEquals(tasks, this.tasksRun.intValue());
         done();
     }
 
@@ -332,7 +331,7 @@ public class TaskProviderTest {
         Thread.sleep(sleep);
         log().debug("Temporary ugly stop");
         interruptAndJoin(threads);
-        assertEquals( tasks, this.tasksRun.intValue());
+        assertEquals(tasks, this.tasksRun.intValue());
         done();
     }
 
