@@ -35,6 +35,7 @@ public class FilebasedReporter implements TestRuntimeReporter {
         } else {
             log().info("Directory '" + id + " already exists under '" + reportDirectory().getName() + "'...");
         }
+        // TODO seems that nobody closes these writers:
         this.latencyWriter = newBufferedWriterFor("latencies");
         this.throughputWriter = newBufferedWriterFor("throughput");
         this.failedInvocationWriter = newBufferedWriterFor("failed-invocations");
@@ -65,16 +66,10 @@ public class FilebasedReporter implements TestRuntimeReporter {
 
         public void write() {
             try {
-                final FileOutputStream output = new FileOutputStream(new File(reportDirectory(), "setup"));
-                try {
-                    final ObjectOutputStream outputStream = new ObjectOutputStream(output);
-                    try {
+                try (FileOutputStream output = new FileOutputStream(new File(reportDirectory(), "setup"))) {
+                    try (ObjectOutputStream outputStream = new ObjectOutputStream(output)) {
                         outputStream.writeObject(setup());
-                    } finally {
-                        outputStream.close();
                     }
-                } finally {
-                    output.close();
                 }
             } catch (IOException ex) {
                 throw new PerftenceRuntimeException(ex);
@@ -114,12 +109,9 @@ public class FilebasedReporter implements TestRuntimeReporter {
 
         public void write(final String id, final long elapsedTime, final long sampleCount, final long startTime)
                 throws IOException {
-            final BufferedWriter bufferedWriter = newBufferedWriterFor("summary");
-            try {
+            try (BufferedWriter bufferedWriter = newBufferedWriterFor("summary")) {
                 bufferedWriter.append(SummaryLine.summaryLine(id, elapsedTime, sampleCount, startTime));
                 bufferedWriter.newLine();
-            } finally {
-                bufferedWriter.close();
             }
         }
 

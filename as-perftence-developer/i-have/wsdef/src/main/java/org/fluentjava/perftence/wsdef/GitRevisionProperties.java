@@ -1,6 +1,7 @@
 package org.fluentjava.perftence.wsdef;
 
 import java.io.File;
+import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
 import org.apache.commons.io.FileUtils;
@@ -29,7 +30,8 @@ public final class GitRevisionProperties extends TargetBase {
 	public void path(TargetEvaluationContext ctx) throws Exception {
 		File tmp = ctx.freshTemporaryDirectory();
 		File script = new File(tmp, "sh");
-		FileUtils.writeStringToFile(script, script(ctx));
+		FileUtils.writeStringToFile(script, script(ctx),
+				StandardCharsets.UTF_8);
 		script.setExecutable(true);
 
 		ScriptGenerated.execute(ctx.wsRoot(),

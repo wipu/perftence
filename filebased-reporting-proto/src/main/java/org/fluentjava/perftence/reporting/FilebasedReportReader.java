@@ -51,12 +51,9 @@ public class FilebasedReportReader {
 
         public FilebasedTestSetup read() {
             try {
-                final FileInputStream input = new FileInputStream(new File(reportDirectory(), "setup"));
-                final ObjectInputStream inputStream = new ObjectInputStream(input);
-                try {
+                try (ObjectInputStream inputStream = new ObjectInputStream(
+                        new FileInputStream(new File(reportDirectory(), "setup")))) {
                     return (FilebasedTestSetup) inputStream.readObject();
-                } finally {
-                    inputStream.close();
                 }
             } catch (FileNotFoundException e) {
                 throw new PerftenceRuntimeException(e);
@@ -91,11 +88,8 @@ public class FilebasedReportReader {
         }
 
         public void read() throws FileNotFoundException, IOException {
-            final FileInputStream setupStream = new FileInputStream(new File(root(), file()));
-            try {
+            try (FileInputStream setupStream = new FileInputStream(new File(root(), file()))) {
                 reader().read(setupStream, lineVisitor());
-            } finally {
-                setupStream.close();
             }
         }
 
