@@ -29,20 +29,21 @@ import org.junit.runner.RunWith;
 public class FilebasedReporterTest extends AbstractMultiThreadedTest {
 
     @Test
-    public void write() {
+    public void write() throws Exception {
         final AtomicInteger i = new AtomicInteger();
         final long now = System.currentTimeMillis();
         final PerformanceTestSetup testSetup = setup().threads(100).invocations(10000).throughputRange(10000).build();
-        final FilebasedReporter reporter = new FilebasedReporter(id(), testSetup, true);
-        test().setup(testSetup).executable(new Executable() {
-            @Override
-            public void execute() throws Exception {
-                final int value = i.incrementAndGet();
-                reporter.latency(value);
-                reporter.throughput(value, value);
-            }
-        }).start();
-        reporter.summary(id(), 5000, 10000, now);
+        try (FilebasedReporter reporter = new FilebasedReporter(id(), testSetup, true)) {
+            test().setup(testSetup).executable(new Executable() {
+                @Override
+                public void execute() throws Exception {
+                    final int value = i.incrementAndGet();
+                    reporter.latency(value);
+                    reporter.throughput(value, value);
+                }
+            }).start();
+            reporter.summary(id(), 5000, 10000, now);
+        }
 
         final LatencyProvider latencyProvider = newLatencyProvider();
         final AdjustedFieldBuilderFactory adjustedFieldBuilderFactory = new AdjustedFieldBuilderFactory(

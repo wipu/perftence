@@ -12,7 +12,7 @@ import org.fluentjava.perftence.setup.PerformanceTestSetup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class FilebasedReporter implements TestRuntimeReporter {
+public class FilebasedReporter implements TestRuntimeReporter, AutoCloseable {
 
     private final static Logger LOG = LoggerFactory.getLogger(FilebasedReporter.class);
     private final BufferedWriter latencyWriter;
@@ -43,6 +43,19 @@ public class FilebasedReporter implements TestRuntimeReporter {
         final TestSetupFileWriter testSetupFileWriter = new TestSetupFileWriter(
                 new FilebasedTestSetup(testSetup, includeInvocationGraph));
         testSetupFileWriter.write();
+    }
+
+    @Override
+    public void close() throws Exception {
+        try {
+            this.latencyWriter.close();
+        } finally {
+            try {
+                this.throughputWriter.close();
+            } finally {
+                this.failedInvocationWriter.close();
+            }
+        }
     }
 
     private BufferedWriter newBufferedWriterFor(final String fileName) {
@@ -81,6 +94,7 @@ public class FilebasedReporter implements TestRuntimeReporter {
         }
     }
 
+    @SuppressWarnings("resource") // Closed in close()
     @Override
     public synchronized void latency(final int latency) {
         try {
@@ -127,6 +141,7 @@ public class FilebasedReporter implements TestRuntimeReporter {
         }
     }
 
+    @SuppressWarnings("resource") // Closed in close()
     @Override
     public synchronized void throughput(final long currentDuration, final double throughput) {
         try {
@@ -144,6 +159,7 @@ public class FilebasedReporter implements TestRuntimeReporter {
         }
     }
 
+    @SuppressWarnings("resource") // Closed in close()
     @Override
     public synchronized void invocationFailed(final Throwable t) {
         try {
