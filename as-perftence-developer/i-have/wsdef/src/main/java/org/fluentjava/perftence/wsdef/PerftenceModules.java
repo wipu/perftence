@@ -36,8 +36,6 @@ public class PerftenceModules extends JavaModules {
 	private final JavaModule afreechart = JavaBinModule.providing(afreechartJar)
 			.end();
 
-	final JavaBinModule asmAll = binModule("org.ow2.asm", "asm-all", "5.0.1");
-
 	private final JavaModule commonsCollections = binModule(
 			"commons-collections", "commons-collections", "3.2.1");
 
@@ -99,7 +97,7 @@ public class PerftenceModules extends JavaModules {
 		return lazy(() -> ourModule("perftence")
 				.mainDeps(commonsCollections, perftenceGraph(), völundrBag,
 						völundrStatistics, slf4jApi)
-				.testDeps(junit, slf4jLog4j12, log4j).end());
+				.testDeps(slf4jLog4j12, log4j).end());
 	}
 
 	private JavaSrcModule perftenceGraphJfreechart() {
@@ -123,7 +121,7 @@ public class PerftenceModules extends JavaModules {
 				() -> ourModule("perftence-defaulttestruntimereporterfactory")
 						.noTestResources()
 						.mainDeps(perftence(), perftenceGraph(), slf4jApi)
-						.testDeps(junit, perftenceGraphJfreechart(),
+						.testDeps(perftenceGraphJfreechart(),
 								perftenceTestreportHtml())
 						.end());
 	}
@@ -153,7 +151,7 @@ public class PerftenceModules extends JavaModules {
 		return lazy(() -> ourModule("perftence-fluent").noTestResources()
 				.mainDeps(perftence(), perftenceGraph(), slf4jApi,
 						völundrConcurrent)
-				.testDeps(junit, perftenceDefaulttestruntimereporterfactory(),
+				.testDeps(perftenceDefaulttestruntimereporterfactory(),
 						perftenceGraphJfreechart(), perftenceTestreportHtml(),
 						reporterfactoryDependenciesJfreechart())
 				.end());
@@ -164,7 +162,7 @@ public class PerftenceModules extends JavaModules {
 				.mainDeps(perftence(),
 						perftenceDefaulttestruntimereporterfactory(),
 						perftenceGraph(), slf4jApi, völundrBag)
-				.testDeps(jfreechart, junit, perftenceGraphJfreechart(),
+				.testDeps(jfreechart, perftenceGraphJfreechart(),
 						perftenceTestreportHtml(),
 						reporterfactoryDependenciesJfreechart())
 				.end());
@@ -174,7 +172,7 @@ public class PerftenceModules extends JavaModules {
 		return lazy(() -> ourModule("perftence-api").noTestResources()
 				.mainDeps(perftence(), perftenceAgents(), perftenceFluent(),
 						perftenceGraph())
-				.testDeps(junit, perftenceDefaulttestruntimereporterfactory(),
+				.testDeps(perftenceDefaulttestruntimereporterfactory(),
 						perftenceGraphJfreechart(), perftenceTestreportHtml(),
 						reporterfactoryDependenciesJfreechart())
 				.end());
@@ -215,8 +213,8 @@ public class PerftenceModules extends JavaModules {
 	private JavaSrcModule acceptanceTests() {
 		return lazy(() -> ourModule("acceptance-tests").noMainJava()
 				.noMainResources().noTestResources()
-				.testDeps(junit, perftence(), perftenceAgents(),
-						perftenceFluent(), perftenceJunit(), perftenceGraph(),
+				.testDeps(perftence(), perftenceAgents(), perftenceFluent(),
+						perftenceJunit(), perftenceGraph(),
 						perftenceGraphJfreechart(), perftenceTestreportHtml(),
 						slf4jApi)
 				.testRuntimeDeps(slf4jLog4j12, log4j).end());
@@ -240,7 +238,7 @@ public class PerftenceModules extends JavaModules {
 				.mainDeps(distributedPerftenceApi(), perftence(),
 						perftenceAgents(), perftenceFluent(), slf4jApi,
 						völundrConcurrent)
-				.testDeps(commonsCollections, junit,
+				.testDeps(commonsCollections,
 						perftenceDefaulttestruntimereporterfactory(),
 						perftenceGraph(), perftenceGraphJfreechart(),
 						perftenceJunit(), perftenceTestreportHtml(),
@@ -251,7 +249,7 @@ public class PerftenceModules extends JavaModules {
 	private JavaSrcModule responsecodeSummaryappender() {
 		return lazy(() -> ourModule("responsecode-summaryappender")
 				.noMainResources().noTestResources()
-				.mainDeps(perftence(), völundrBag).testDeps(junit).end());
+				.mainDeps(perftence(), völundrBag).testDeps().end());
 	}
 
 	private JavaSrcModule filebasedReportingProto() {
@@ -263,14 +261,14 @@ public class PerftenceModules extends JavaModules {
 						perftenceTestreportHtml(),
 						reporterfactoryDependenciesJfreechart(), slf4jApi,
 						völundrStringToBytes, völundrLinereader)
-				.testDeps(junit, perftenceFluent(), perftenceJunit())
+				.testDeps(perftenceFluent(), perftenceJunit())
 				.testRuntimeDeps(log4j, slf4jLog4j12).end());
 	}
 
 	private JavaSrcModule fluentBasedExample() {
 		return lazy(
 				() -> ourModule("fluent-based-example").noMainJava()
-						.noMainResources().testDeps(junit, perftence(),
+						.noMainResources().testDeps(perftence(),
 								perftenceFluent(), perftenceJunit(), slf4jApi)
 						.end());
 	}
@@ -279,7 +277,7 @@ public class PerftenceModules extends JavaModules {
 		return lazy(
 				() -> ourModule("agent-based-example").noMainJava()
 						.noMainResources()
-						.testDeps(junit, log4j, perftence(), perftenceAgents(),
+						.testDeps(log4j, perftence(), perftenceAgents(),
 								perftenceJunit(), slf4jApi, slf4jLog4j12)
 						.end());
 	}

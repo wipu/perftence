@@ -11,7 +11,7 @@ public class PerftenceWorkspaceModuleProvider
 		implements WorkspaceModuleProvider {
 
 	public static final JavaBinModule commonsIo = binModule("commons-io",
-			"commons-io", "2.4");
+			"commons-io", "2.17.0");
 
 	private static JavaBinModule binModule(String group, String name,
 			String version, JavaModule... runtimeDeps) {
