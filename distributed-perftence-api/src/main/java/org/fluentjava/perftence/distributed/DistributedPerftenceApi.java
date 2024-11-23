@@ -8,10 +8,9 @@ import java.util.concurrent.ExecutorService;
 import org.fluentjava.perftence.RunNotifier;
 import org.fluentjava.perftence.TestFailureNotifier;
 import org.fluentjava.perftence.fluent.DefaultRunNotifier;
+import org.fluentjava.volundr.concurrent.ExecutorServiceFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.concurrent.ExecutorServiceFactory;
 
 public final class DistributedPerftenceApi {
 

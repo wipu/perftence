@@ -6,10 +6,9 @@ import java.util.List;
 import java.util.concurrent.ThreadFactory;
 
 import org.fluentjava.perftence.TestFailureNotifier;
+import org.fluentjava.volundr.concurrent.NamedThreadFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.concurrent.NamedThreadFactory;
 
 final class SchedulingServiceBasedOnTaskProvider implements TestTaskSchedulingService {
     private static final Logger LOG = LoggerFactory.getLogger(SchedulingServiceBasedOnTaskProvider.class);

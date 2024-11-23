@@ -20,8 +20,7 @@ import org.fluentjava.perftence.reporting.summary.SummaryFieldFactory;
 import org.fluentjava.perftence.reporting.summary.TestSummaryLoggerFactory;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo.PerformanceTestSetupBuilder;
-
-import net.sf.völundr.concurrent.ThreadEngineApi;
+import org.fluentjava.volundr.concurrent.ThreadEngineApi;
 
 /**
  * Entry point class for fluent performance test
@@ -52,8 +51,11 @@ public final class FluentPerformanceTest {
         this.failureNotifier = failureNotifier;
         this.runNotifier = runNotifier;
         this.estimatedInvocations = new EstimatedInvocations();
+        // TODO hmm, it seems we should be able to pass runnables already here.
+        // ThreadEngineApi requires them in constructor.
+        // But HOW?
         this.invocationRunnerFactory = new InvocationRunnerFactory(
-                new ThreadEngineApi<Invocation>().threadNamePrefix("perf-test"));
+                ThreadEngineApi.<Invocation> builder().threadNamePrefix("perf-test").build());
         final FieldFormatter fieldFormatter = new FieldFormatter();
         final FieldAdjuster fieldAdjuster = new FieldAdjuster();
         this.summaryBuilderFactory = newSummaryBuilderFactory(fieldFormatter, fieldAdjuster);

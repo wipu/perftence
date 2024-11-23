@@ -11,12 +11,11 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.fluentjava.perftence.TestFailureNotifier;
+import org.fluentjava.volundr.concurrent.NamedThreadFactory;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.concurrent.NamedThreadFactory;
 
 public class TaskProviderTest {
     private final static Logger LOG = LoggerFactory.getLogger(TaskProviderTest.class);

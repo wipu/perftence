@@ -3,8 +3,7 @@ package org.fluentjava.perftence.common;
 import java.util.List;
 
 import org.fluentjava.perftence.graph.GraphStatisticsProvider;
-
-import net.sf.völundr.statistics.StatisticsCalculator;
+import org.fluentjava.volundr.statistics.StatisticsCalculator;
 
 public final class Statistics implements GraphStatisticsProvider {
 

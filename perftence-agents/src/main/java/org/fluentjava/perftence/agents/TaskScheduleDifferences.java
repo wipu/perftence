@@ -15,8 +15,7 @@ import org.fluentjava.perftence.graph.LineChartAdapterProvider;
 import org.fluentjava.perftence.reporting.ReportingOptions;
 import org.fluentjava.perftence.reporting.summary.Summary;
 import org.fluentjava.perftence.reporting.summary.SummaryAppender;
-
-import net.sf.völundr.bag.StronglyTypedSortedBag;
+import org.fluentjava.volundr.bag.StronglyTypedSortedBag;
 
 public final class TaskScheduleDifferences implements GraphWriterProvider {
     private static final DecimalFormat DF = new DecimalFormat("####");

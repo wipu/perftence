@@ -16,11 +16,10 @@ import org.fluentjava.perftence.reporting.summary.FailedInvocations;
 import org.fluentjava.perftence.reporting.summary.FailedInvocationsFactory;
 import org.fluentjava.perftence.setup.PerformanceTestSetup;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo;
+import org.fluentjava.volundr.LineReader;
+import org.fluentjava.volundr.LineVisitor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.LineReader;
-import net.sf.völundr.LineVisitor;
 
 public class FilebasedReportReader {
 

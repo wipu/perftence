@@ -29,12 +29,11 @@ import org.fluentjava.perftence.reporting.summary.FailedInvocations;
 import org.fluentjava.perftence.reporting.summary.FailedInvocationsFactory;
 import org.fluentjava.perftence.reporting.summary.FieldAdjuster;
 import org.fluentjava.perftence.setup.PerformanceTestSetupPojo.PerformanceTestSetupBuilder;
+import org.fluentjava.volundr.concurrent.NamedThreadFactory;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.concurrent.NamedThreadFactory;
 
 @RunWith(DefaultTestRunner.class)
 public class DirectThreadModelTests extends AbstractMultiThreadedTest {

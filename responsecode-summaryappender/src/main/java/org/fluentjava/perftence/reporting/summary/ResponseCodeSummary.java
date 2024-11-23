@@ -3,7 +3,7 @@ package org.fluentjava.perftence.reporting.summary;
 import java.text.DecimalFormat;
 import java.util.Collection;
 
-import net.sf.völundr.bag.StronglyTypedSortedBag;
+import org.fluentjava.volundr.bag.StronglyTypedSortedBag;
 
 public class ResponseCodeSummary implements SummaryAppender {
 

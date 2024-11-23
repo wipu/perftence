@@ -24,6 +24,7 @@ public class PerftenceWorkspaceModuleProvider
 				.locationUnderWsRoot("as-perftence-developer/i-have/wsdef")
 				.mainJava("src/main/java").mainDeps(ctx.iwantApiModules())
 				.mainDeps(ctx.wsdefdefModule())
+				.mainDeps(ctx.iwantPlugin().github().withDependencies())
 				.mainDeps(ctx.iwantPlugin().jacoco().withDependencies())
 				.mainDeps(commonsIo).end();
 	}

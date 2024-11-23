@@ -1,18 +1,18 @@
 package org.fluentjava.perftence.common;
 
+import java.io.File;
 import java.nio.charset.Charset;
 
 import org.fluentjava.perftence.PerftenceRuntimeException;
 import org.fluentjava.perftence.reporting.TestReport;
+import org.fluentjava.volundr.fileio.AppendToFileFailed;
+import org.fluentjava.volundr.fileio.FileAppendHandler;
+import org.fluentjava.volundr.fileio.FileAppender;
+import org.fluentjava.volundr.fileio.FileUtil;
+import org.fluentjava.volundr.fileio.WritingFileFailed;
+import org.fluentjava.volundr.io.StringToBytes;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.fileio.AppendToFileFailed;
-import net.sf.völundr.fileio.FileAppendHandler;
-import net.sf.völundr.fileio.FileAppender;
-import net.sf.völundr.fileio.FileUtil;
-import net.sf.völundr.fileio.WritingFileFailed;
-import net.sf.völundr.io.StringToBytes;
 
 public final class HtmlTestReport implements TestReport {
     private final static Logger LOG = LoggerFactory.getLogger(HtmlTestReport.class);
@@ -47,7 +47,15 @@ public final class HtmlTestReport implements TestReport {
      * Factory method for creating test report with default values
      */
     public static TestReport withDefaultReportPath() {
-        return testReport(System.getProperty("user.dir") + "/target/perftence", Charset.defaultCharset());
+        // TODO MUCH better and explicit control over output files than this!!
+        // But for now this implicit output directory is at least
+        // 1) ensured to exist
+        // 2) be somewhat isolated i.e. owned by the caller
+        // 2) exist under /tmp, to not pollute other locations
+        String caller = new Exception().getStackTrace()[1].getClassName();
+        File outDir = new File("/tmp/.org.fluentjava.perftence/default-report-path/" + caller);
+        outDir.mkdirs();
+        return testReport(outDir.getAbsolutePath(), Charset.defaultCharset());
     }
 
     /**

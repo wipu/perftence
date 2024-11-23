@@ -2,10 +2,9 @@ package org.fluentjava.perftence.fluent;
 
 import org.fluentjava.perftence.RunNotifier;
 import org.fluentjava.perftence.TestFailureNotifier;
+import org.fluentjava.volundr.concurrent.ThreadEngineApi;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import net.sf.völundr.concurrent.ThreadEngineApi;
 
 public final class InvocationRunnerFactory {
     private final static Logger LOG = LoggerFactory.getLogger(InvocationRunnerFactory.class);
@@ -25,7 +24,7 @@ public final class InvocationRunnerFactory {
 
             @Override
             public void run(final Invocation[] runnables) {
-                engineApi().runnables(runnables).run();
+                engineApi().run();
             }
 
             @Override

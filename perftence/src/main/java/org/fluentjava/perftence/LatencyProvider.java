@@ -2,7 +2,7 @@ package org.fluentjava.perftence;
 
 import java.util.Collection;
 
-import net.sf.völundr.bag.StronglyTypedSortedBag;
+import org.fluentjava.volundr.bag.StronglyTypedSortedBag;
 
 public final class LatencyProvider implements StatisticsProvider, RuntimeStatisticsProvider, TestTimeAware {
 
