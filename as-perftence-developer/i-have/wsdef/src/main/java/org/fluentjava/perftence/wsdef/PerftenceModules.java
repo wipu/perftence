@@ -318,11 +318,11 @@ public class PerftenceModules extends JavaModules {
 		Path java = new SubPath("völundr-" + name + "-java", völundrCode(),
 				name + "/src/main/java");
 		JavaClassesSpex classes = JavaClasses.with()
-				.name("joulu-" + name + "-classes").srcDirs(java);
+				.name("völundr-" + name + "-classes").srcDirs(java);
 		for (JavaModule dep : deps) {
 			classes = classes.classLocations(dep.mainArtifact());
 		}
-		Path jar = Jar.with().name("joulu-" + name + ".jar")
+		Path jar = Jar.with().name("völundr-" + name + ".jar")
 				.classes(classes.end()).end();
 
 		return JavaBinModule.providing(jar, java).end();
